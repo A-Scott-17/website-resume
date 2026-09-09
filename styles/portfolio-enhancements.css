@@ -1,0 +1,55 @@
+/* Image presentation upgrades: restrained depth, clear hierarchy, no flashing effects. */
+.hero-media {
+  position: relative;
+}
+
+.hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 34px -18px -18px 34px;
+  border: 1px solid rgba(139, 30, 20, 0.28);
+  pointer-events: none;
+}
+
+.hero-media > img {
+  position: relative;
+  z-index: 1;
+  filter: none;
+  box-shadow: 14px 14px 0 rgba(139, 30, 20, 0.14);
+}
+
+.project-card,
+.credential-grid article {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.project-card:hover,
+.project-card:focus-within,
+.credential-grid article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(93, 25, 18, 0.14);
+}
+
+.project-card > img {
+  height: 208px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.credential-grid img {
+  height: 190px;
+  filter: grayscale(20%) contrast(1.04);
+}
+
+.project-card.featured {
+  background: linear-gradient(120deg, #fffdf0, #f5e3d9);
+}
+
+@media (max-width: 820px) {
+  .hero-media::before { inset: 20px -10px -10px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .credential-grid article { transition: none; }
+}
