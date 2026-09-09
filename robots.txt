@@ -1,0 +1,6 @@
+// Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+// Point bots to your sitemap to help them index faster
+Sitemap: https://a-scott-17.github.io/website-resume/sitemap.xml
