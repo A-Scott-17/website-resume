@@ -1,12 +1,47 @@
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#site-nav');
-if (menuButton && navigation) {
-  menuButton.addEventListener('click', () => { const isOpen = navigation.classList.toggle('open'); menuButton.setAttribute('aria-expanded', String(isOpen)); });
-  navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { navigation.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); }));
+
+function closeMenu() {
+  navigation?.classList.remove('open');
+  menuButton?.setAttribute('aria-expanded', 'false');
 }
-const revealItems = document.querySelectorAll('.reveal');
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); } }), { threshold: 0.12 });
-  revealItems.forEach((item) => observer.observe(item));
-} else { revealItems.forEach((item) => item.classList.add('is-visible')); }
-document.querySelector('#year').textContent = new Date().getFullYear();
+
+menuButton?.addEventListener('click', () => {
+  const isOpen = navigation.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(isOpen));
+});
+
+navigation?.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener('click', closeMenu);
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeMenu();
+});
+
+document.addEventListener('click', (event) => {
+  if (!navigation?.classList.contains('open')) return;
+  if (navigation.contains(event.target) || menuButton.contains(event.target)) return;
+  closeMenu();
+});
+
+const sectionLinks = Array.from(navigation?.querySelectorAll('a[href^="#"]') || []);
+if ('IntersectionObserver' in window && sectionLinks.length) {
+  const sections = sectionLinks
+    .map((link) => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+  const sectionObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      sectionLinks.forEach((link) => {
+        const active = link.getAttribute('href') === `#${entry.target.id}`;
+        if (active) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    }
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach((section) => sectionObserver.observe(section));
+}
+
+const year = document.querySelector('#year');
+if (year) year.textContent = new Date().getFullYear();
