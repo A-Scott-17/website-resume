@@ -16,8 +16,13 @@ navigation?.querySelectorAll('a[href^="#"]').forEach((link) => {
 });
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') closeMenu();
+  if (event.key === 'Escape' && navigation?.classList.contains('open')) {
+    closeMenu();
+    menuButton?.focus();
+  }
 });
+
+window.matchMedia('(min-width: 1001px)').addEventListener('change', closeMenu);
 
 document.addEventListener('click', (event) => {
   if (!navigation?.classList.contains('open')) return;
@@ -35,7 +40,7 @@ if ('IntersectionObserver' in window && sectionLinks.length) {
       if (!entry.isIntersecting) continue;
       sectionLinks.forEach((link) => {
         const active = link.getAttribute('href') === `#${entry.target.id}`;
-        if (active) link.setAttribute('aria-current', 'true');
+        if (active) link.setAttribute('aria-current', 'location');
         else link.removeAttribute('aria-current');
       });
     }

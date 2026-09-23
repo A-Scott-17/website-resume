@@ -29,39 +29,45 @@ styles = {
 
 
 def text(value, style="body"):
+    # Keep the public PDF readable in standard PDF fonts and text extractors.
+    value = value.translate(str.maketrans({"–": "-", "—": "-", "•": "-", "·": "|"}))
     return Paragraph(value, styles[style])
 
 
 story = [
     text("Alexander Scott", "name"),
-    text("SECURITY OPERATIONS  |  COMPUTER INFORMATION SYSTEMS  |  TECHNOLOGY", "tag"),
+    text("FORMER U.S. MARINE CORPS SERGEANT  |  COMPUTER INFORMATION SYSTEMS STUDENT", "tag"),
     text("Charleston, SC  ·  AlexEScott00@gmail.com  ·  (309) 370-8891", "contact"),
-    text("linkedin.com/in/alexescott  ·  github.com/A-Scott-17  ·  a-scott-17.github.io/website-resume/", "contact"),
+    text("linkedin.com/in/alexescott  ·  <link href='https://github.com/A-Scott-17' color='#55423e'>github.com/A-Scott-17</link>  ·  a-scott-17.github.io/website-resume/", "contact"),
     Spacer(1, 7),
     HRFlowable(width="100%", thickness=1.2, color=MAROON),
     text("PROFILE", "section"),
-    text("Former U.S. Marine Corps Sergeant and College of Charleston CIS student seeking a Summer 2027 internship in cybersecurity, technical security, IT, or information systems. Five years in security operations and leadership, including WHCA national-security missions; now developing programming, web, and applied AI skills."),
-    text("EXPERIENCE", "section"),
-    text("White House Communications Agency  |  Security and Section Leadership  |  Jan 2021–Dec 2022", "role"),
-    text("• Provided 24/7 security for assets vital to national security in coordination with the U.S. Secret Service and other agencies, supporting Presidential and Vice-Presidential missions."),
-    text("• Progressed from Post Stander to Team Leader (4 personnel), Squad Leader (12), and Section Leader/NCOIC (up to 27)."),
-    text("• As Sergeant of the Guard, coordinated 16+ Marines in daily post operations; supported access control, camera and alarm monitoring, threat and emergency response across three compounds."),
-    text("• Delivered monthly updates to DoD stakeholders; facilitated or supported security and emergency-response training for 30+ Marines. Supported technical-security personnel with protective measures for sensitive mission environments."),
+    text("Former U.S. Marine Corps Sergeant with five years of service (July 2019–July 2024), including security operations and personnel leadership at the White House Communications Agency. College of Charleston Computer Information Systems student seeking a Summer 2027 internship in technical security, cybersecurity, IT, information systems, or defense technology."),
+    text("SECURITY EXPERIENCE", "section"),
+    text("White House Communications Agency  |  Security Operations and Leadership  |  Jan 2021–Dec 2022", "role"),
+    text("• Progressed from Post Stander (Jan–Apr 2021) to Team Leader (~4 personnel, Apr–Aug 2021), Squad Leader (~12, Aug 2021–May 2022), and Section Leader/NCOIC (up to 27, May–Dec 2022)."),
+    text("• As Sergeant of the Guard, supervised 16+ posted Marines and managed shift-level security operations across three compounds simultaneously, including post assignments, access-control issues, personnel accountability, incident response, and reporting."),
+    text("• Presented monthly security and readiness updates to WHCA leadership and interagency partners. Planned and instructed security and emergency-response training events for groups of 30+ Marines."),
+    text("• Assisted technical-security personnel with security equipment and supported physical security requirements for sensitive communications assets and SCIF environments during domestic and international missions."),
     text("1st Battalion, 1st Marines  |  Team Leader / Assistant NCOIC  |  Jan 2023–Feb 2024", "role"),
-    text("• Led and mentored Marines while supporting training, readiness, personnel accountability, and mission execution at Camp Pendleton."),
+    text("• Team Leader, B Company (Jan–Jun 2023); Assistant NCOIC, ADRC (Jun 2023–Feb 2024)."),
     text("Marine Barracks Washington  |  Post Stander / Team Leader  |  Mar 2020–Jan 2021", "role"),
-    text("• Provided physical security supporting senior Department of Defense leadership and security procedures in sensitive environments."),
-    text("SELECTED TECHNICAL PROJECTS", "section"),
-    text("Local business websites  |  Independent developer", "role"),
-    text("• Built and deployed live websites for Titan Brazilian Jiu-Jitsu and Cooper Counseling, translating client requirements into responsive pages and clear inquiry paths. Worked with HTML, CSS, JavaScript, Git, production hosting, DNS, HTTPS, forms, and SEO."),
-    text("AI-Assisted Physical Security Management System  |  Work in progress", "role"),
-    text("• Exploring a simulated access-log and incident-review workflow with AI-assisted event explanations and human decisions. Concept and development stage; no completed detection system claimed."),
+    text("• Provided shift-based physical security for senior Marine Corps and Navy leadership, their families, and guests; served in a continuous security operation with recall requirements."),
+    text("TECHNICAL PROJECTS", "section"),
+    text("<link href='https://github.com/A-Scott-17/emotion-detection' color='#35100c'>AI Emotion Detection</link>  |  Developer", "role"),
+    text("• Built a Python webcam demo with OpenCV face detection and a TensorFlow/Keras happy/sad classifier. Security-camera use was conceptual; the program does not detect threats or people needing assistance."),
+    text("Titan Brazilian Jiu-Jitsu  |  Website developer", "role"),
+    text("• Worked with the owner to plan, code, deploy, and revise a responsive class and trial-inquiry website. Used HTML, CSS, JavaScript, GitHub Pages, DNS, HTTPS, and FormSubmit."),
+    text("Cooper Counseling  |  Website developer", "role"),
+    text("• Built and deployed a multi-page counseling website, integrated a Hushmail contact form, supported hosting and domain migration, improved SEO metadata and routing, and made owner-requested revisions."),
     text("EDUCATION &amp; SKILLS", "section"),
     text("College of Charleston  |  B.S. Computer Information Systems  |  Expected Fall 2027", "role"),
-    text("Overall GPA 3.259 · CIS GPA 3.386 · Applied AI, Programming I &amp; II, User Interface Development, Management Information Systems", "small"),
-    text("Development: HTML, CSS, JavaScript, Python, Java  ·  Deployment: Git, GitHub, GitHub Pages, DNS, HTTPS  ·  Security: access control, surveillance and alarm monitoring, emergency response, risk management", "small"),
-    text("RECOGNITION", "section"),
-    text("Presidential Support Badge · Marine Corps Good Conduct Award · Letter of Appreciation · TS/SCI obtained in 2020 (current status not stated)", "small"),
+    text("Overall GPA 3.259 · CIS GPA 3.386 · Completed: Applied AI, Programming I &amp; II, Management Information Systems · In progress Fall 2026: User Interface Development, Entrepreneurship", "small"),
+    text("Development: HTML, CSS, JavaScript, Python, Java · Deployment: Git, GitHub, DNS, HTTPS · Security: access control, camera and alarm monitoring, emergency response, incident reporting, SCIF security support", "small"),
+    text("AWARDS AND RECOGNITION", "section"),
+    text("Presidential Support Badge (Jan 2022) · Marine Corps Good Conduct Award (Jul 2022) · Letter of Appreciation from the Sergeant Major of the Marine Corps · Global War on Terrorism Service Medal", "small"),
+    text("SECURITY CLEARANCE", "section"),
+    text("TS/SCI obtained in 2020.", "small"),
 ]
 
 doc = SimpleDocTemplate(
