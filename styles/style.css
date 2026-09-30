@@ -56,7 +56,7 @@ h1 { max-width: 760px; margin: 0; color: var(--maroon-dark); font-size: clamp(3.
 .text-action:hover { color: var(--maroon-light); }
 .hero-media { position: relative; }
 .hero-media::before { content: ""; position: absolute; inset: 28px -14px 18px 28px; border: 1px solid rgba(139,30,20,.35); }
-.hero-media img { position: relative; display: block; width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; box-shadow: 15px 15px 0 rgba(139,30,20,.13); }
+.hero-media img { position: relative; display: block; width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; object-position: center 20%; box-shadow: 15px 15px 0 rgba(139,30,20,.13); }
 .proof-strip { background: var(--maroon); color: #fff; }
 .proof-grid { display: grid; grid-template-columns: repeat(5, 1fr); }
 .proof-grid p { margin: 0; padding: 21px 18px; border-left: 1px solid rgba(255,255,255,.24); }
